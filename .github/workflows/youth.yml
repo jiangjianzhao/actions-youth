@@ -6,7 +6,7 @@ name: youth(中青看点)
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/15 * * * *'
+     - cron: '*/10 * * * *'
   watch:
     types: youth
 
@@ -36,7 +36,7 @@ jobs:
         if: env.YOUTH_HEADER
         run: |
           cd ~/Scripts
-          node Task/youth.js
+          node youth.js
         env:
           YOUTH_NOTIFY_CONTROL: ${{ secrets.YOUTH_NOTIFY_CONTROL }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
