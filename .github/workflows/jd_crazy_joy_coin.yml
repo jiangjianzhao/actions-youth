@@ -1,0 +1,30 @@
+name: jd_crazy_joy_coin(疯狂joy挂机)
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '*/30 * * * *'
+  watch:
+    types: jd_crazy_joy_coin
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+      CookiesJD: ${{ secrets.CookiesJD }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: |
+          npm install
+          
+      - name: '运行 【疯狂joy挂机】'
+        if: env.CookiesJD
+        run: |
+          node jd_crazy_joy_coin.js
+        env:
+          CookiesJD: ${{ secrets.CookiesJD }}
